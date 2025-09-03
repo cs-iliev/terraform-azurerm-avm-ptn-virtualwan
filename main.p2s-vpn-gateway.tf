@@ -45,5 +45,16 @@ resource "azurerm_point_to_site_vpn_gateway" "p2s_gateway" {
     vpn_client_address_pool {
       address_prefixes = each.value.connection_configuration.vpn_client_address_pool.address_prefixes
     }
+
+    route {
+      associated_route_table_id = module.virtual_hubs.resource[each.value.virtual_hub_key].default_route_table_id
+
+      propagated_route_table {
+        ids    = [module.virtual_hubs.resource[each.value.virtual_hub_key].default_route_table_id]
+        labels = ["default"]
+      }
+    }
+
+    internet_security_enabled = true
   }
 }

@@ -32,12 +32,13 @@ output "resource_object" {
   description = "Virtual Hub Object"
   value = {
     for key, hub in azurerm_virtual_hub.virtual_hub : key => {
-      id             = hub.id
-      name           = hub.name
-      location       = hub.location
-      resource_group = hub.resource_group_name
-      sku            = hub.sku
-      tags           = hub.tags
+      id                     = hub.id
+      name                   = hub.name
+      location               = hub.location
+      resource_group         = hub.resource_group_name
+      sku                    = hub.sku
+      default_route_table_id = hub.default_route_table_id
+      tags                   = hub.tags
     }
   }
 }
