@@ -271,25 +271,11 @@ variable "p2s_gateways" {
     tags                                     = optional(map(string))
     dns_servers                              = optional(list(string))
     p2s_gateway_vpn_server_configuration_key = string
-        connection_configuration = object({
+    connection_configuration = object({
       name = string
-
       vpn_client_address_pool = object({
         address_prefixes = list(string)
       })
-
-      route = optional(list(object({
-        associated_route_table_key = string
-        inbound_route_map_key      = optional(string)
-        outbound_round_map_key     = optional(string)
-
-        propagated_route_table = optional(object({
-          route_table_keys = optional(list(string), [])
-          labels           = optional(list(string), [])
-        }))
-      })), [])
-
-      internet_security_enabled = optional(bool)
     })
     scale_unit = number
   }))
